@@ -123,7 +123,7 @@ Entering interactive mode (type "help" for commands, "o" for options)
 (pprof) web
 (pprof) quit
 ```
-![avatar](images/pprof001.svg)
+![avatar](https://github.com/ZhangYongChang/learngo/tree/master/images/pprof001.svg)
 
 ```go
 package main
@@ -153,4 +153,4 @@ ok      github.com/ZhangYongChang/learngo/nonrepeatingsubstr    2.215s
 
 ```
 
-![avatar](images/pprof002.svg)
+![avatar](https://github.com/ZhangYongChang/learngo/tree/master/images/pprof002.svg)
