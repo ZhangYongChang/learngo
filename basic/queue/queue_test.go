@@ -1,12 +1,12 @@
-package main
+package queue
 
 import (
 	"fmt"
-	"yczhang.com/queue"
+	"testing"
 )
 
-func main() {
-	q := queue.Queue{1}
+func TestList(t *testing.T) {
+	q := Queue{1}
 	q.Push(2)
 	q.Push(3)
 	fmt.Println(q.Pop())
@@ -14,4 +14,5 @@ func main() {
 	fmt.Println(q.IsEmpty())
 	fmt.Println(q.Pop())
 	fmt.Println(q.IsEmpty())
+
 }
