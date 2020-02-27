@@ -1,18 +1,15 @@
-package queue
+package main
 
 import (
-	"fmt"
 	"testing"
 )
 
-func TestList(t *testing.T) {
+func TestQueue_Pop(t *testing.T) {
 	q := Queue{1}
 	q.Push(2)
 	q.Push(3)
-	fmt.Println(q.Pop())
-	fmt.Println(q.Pop())
-	fmt.Println(q.IsEmpty())
-	fmt.Println(q.Pop())
-	fmt.Println(q.IsEmpty())
-
+	head := q.Pop()
+	if head != 1 {
+		t.Errorf("Pop data is %d \n", head )
+	}
 }

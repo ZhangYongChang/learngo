@@ -1,4 +1,6 @@
-package queue
+package main
+
+import "fmt"
 
 type Queue []int
 
@@ -14,4 +16,15 @@ func (q *Queue) Pop() int {
 
 func (q *Queue) IsEmpty() bool {
 	return len(*q) == 0
+}
+
+func main() {
+	q := Queue{1}
+	q.Push(2)
+	q.Push(3)
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+	fmt.Println(q.IsEmpty())
+	fmt.Println(q.Pop())
+	fmt.Println(q.IsEmpty())
 }
