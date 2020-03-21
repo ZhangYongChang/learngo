@@ -4,15 +4,22 @@ import "testing"
 
 func TestSubStr(t *testing.T) {
 	tests := []struct {
-		s string
+		s   string
 		ans int
-	} {
-		{"abcabcbb", 3 },
-		{ "一二三三二一", 3 },
+	}{
+		{"abcabcbb", 3},
+		{"一二三三二一", 3},
 	}
 
 	for _, tt := range tests {
 		actual := lengthOfNonRepeatingSubStr(tt.s)
+		if actual != tt.ans {
+			t.Errorf("got %d for input %s; expected %d", actual, tt.s, tt.ans)
+		}
+	}
+
+	for _, tt := range tests {
+		actual := lengthOfNonRepeatingSubStr2(tt.s)
 		if actual != tt.ans {
 			t.Errorf("got %d for input %s; expected %d", actual, tt.s, tt.ans)
 		}

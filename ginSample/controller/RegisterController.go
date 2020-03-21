@@ -8,6 +8,7 @@ import (
 	"github.com/ZhangYongChang/learngo/ginSample/util"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func Register(ctx *gin.Context) {
@@ -17,12 +18,12 @@ func Register(ctx *gin.Context) {
 	password := ctx.PostForm("password")
 
 	if len(telephone) != 11 {
-		ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "手机号必须为11位"})
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "手机号必须为11位")
 		return
 	}
 
 	if len(password) < 6 {
-		ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "密码必须大于6位"})
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码必须大于6位")
 		return
 	}
 
@@ -31,18 +32,24 @@ func Register(ctx *gin.Context) {
 	}
 
 	if isTelephoneExist(db, telephone) {
-		ctx.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "用户已经存在"})
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户已经存在")
+		return
+	}
+
+	hasedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		util.Response(ctx, http.StatusUnprocessableEntity, 500, nil, "加密错误")
 		return
 	}
 
 	newUser := model.User{
 		Name:      name,
 		Telephone: telephone,
-		Password:  password,
+		Password:  string(hasedPassword),
 	}
 	db.Create(&newUser)
 
-	ctx.JSON(200, gin.H{"msg": "注册成功"})
+	util.Success(ctx, nil, "注册成功")
 }
 
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
