@@ -37,6 +37,8 @@ go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 
 通过观看golang Google的资深工程师讲解的视频教程来学习，结合项目的需要，其中可能穿插有docker等工具的使用，我们学习过程中有使用到。
 
+git config --global credential.helper store
+
 
 # 程序调优
 
